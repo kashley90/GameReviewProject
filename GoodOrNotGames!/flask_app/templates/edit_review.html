@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Review</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-between align-items-center col-12">
+        <h1 class="text-center">Good or Not Games!</h1>
+       <!-- insert game title here -->
+        <h5 class="text-center">{{user.first_name}} {{user.last_name}}</h5>
+        <div class="d-flex col-4 justify-content-around">
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            <a href="/logout" class="btn btn-secondary">Logout</a>
+
+        </div>
+
+    </nav>
+    <form action="/update/review" method="post" class="col-6 p-4 my-4 bg-dark text-light mx-auto">
+        <h3 class="text-primary">Edit this Review</h3>
+        {% with messages = get_flashed_messages(category_filter=['review']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>OH NO!</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="d-flex justify-content-between col-12">
+            <input type="hidden" name="game_id" value={{review.id}}>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="review">Review:</label>
+                    <textarea name="review"  cols="20" rows="20" class="form-control">{{review.review}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="score">Score:</label>
+                    <input type="number" name="score" value={{review.score}} class="form-control">   
+                </div>
+                <div>
+                <input type="submit" value="Edit Review" class="btn btn-success">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

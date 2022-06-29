@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-between align-items-center col-12">
+        <h1 class="text-center">Good or Not Games!</h1>
+        <h5 class="text-center">{{user.first_name}} {{user.last_name}}</h5>
+        <div class="d-flex col-4 justify-content-around">
+            <a href="/logout" class="btn btn-success">Logout</a>
+
+        </div>
+
+    </nav>
+    <div class="col-12 mx-auto">
+
+        <table class="table table-hover">
+            <thead>
+                <h3>Games to Review</h3>
+                <tr>
+                    <th></th>
+                    <th>Game Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for game in games %}
+                    <tr>
+                        <td> <img src={{"/static/images/%s"|format(game.images)}}></td>
+                        <td>{{game.game_title}}</td>
+                        <td>{{game.description}}</td>
+                        <td>
+                            <a href="/review/{{game.id}}" class="btn btn-secondary">See all Reviews</a>
+                            <a href="/new/review/{{game.id}}" class="btn btn-primary">Review this Game</a>
+                        </td>
+                {%endfor%}
+            </tbody>
+        </table> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Review</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-between align-items-center col-12">
+        <h1 class="text-center">Good Or Not Games!</h1>
+        <h2 class="text-center">{{game.game_title}}</h2>
+        <!-- This is where to put the Game Title on the Header in h2  -->
+        <h3 class="text-center">{{user.first_name}} {{user.last_name}}</h3>
+        <div class="d-flex col-4 justify-content-around">
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            <a href="/logout" class="btn btn-secondary">Logout</a>
+
+        </div>
+
+    </nav>
+    <form action="/create/review" method="post" class="col-6 p-4 my-4 bg-dark text-light mx-auto">
+        <h3 class="text-primary">Add a New Review</h3>
+        {% with messages = get_flashed_messages(category_filter=['review']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>OH NO!!!!</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %} 
+        
+        <div class="d-flex justify-content-between col-12">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="user">
+                    <label for="review">Review:</label>
+                    <textarea name="review"  cols="200" rows="20" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="score">Score:</label>
+                    <input type="number" name="score" class="form-control">   
+                </div>
+                <div>
+                <input type="submit" value="Add Review" class="btn btn-success">
+                </div>
+            </div>
+        </div>
+        <input type="hidden" value="{{game.id}}" name="game_id">
+    </form>
+</body>
+</html>
